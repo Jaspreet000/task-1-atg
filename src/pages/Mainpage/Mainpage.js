@@ -24,7 +24,7 @@ import reco2 from "../../assets/reco2.png";
 import reco3 from "../../assets/reco3.png";
 import reco4 from "../../assets/reco4.png";
 import leavearrow from "../../assets/leaveee.svg";
-import exittt from '../../assets/outline-exit_to_app-24px.svg';
+import exittt from "../../assets/outline-exit_to_app-24px.svg";
 import exclaim from "../../assets/exclaim.svg";
 import LocationInput from "../../components/LocationInp/LocationInput";
 import Signin from "../../components/SignIn/Signin";
@@ -36,14 +36,21 @@ const Mainpage = () => {
   const [user, setUser] = useState(null);
   const [isSigned, setisSigned] = useState(false);
   const [btninfo, setbtninfo] = useState({
-    text:"Join Group",
-    img:groupp,
-    btnClass:'color-btn'
+    text: "Join Group",
+    img: groupp,
+    btnClass: "color-btn",
   });
-  const [followw, setfollow] = useState({
-    text:"Follow",
-    btnClass:''
-  })
+  // const [followw, setfollow] = useState({
+  //   text:"Follow",
+  //   btnClass:''
+  // });
+
+  const [followStatus, setFollowStatus] = useState({
+    Leisure: false,
+    Activism: false,
+    MBA: false,
+    Philosophy: false,
+  });
 
   const handleSignIn = (userData) => {
     setUser(userData);
@@ -51,35 +58,27 @@ const Mainpage = () => {
     setShowSign(false);
   };
 
-  const joinorLeave = () =>{
-    if(btninfo.text === "Join Group"){
+  const joinorLeave = () => {
+    if (btninfo.text === "Join Group") {
       setbtninfo({
-        text:"Leave Group",
-        img:exittt
-      })
-    }else{
+        text: "Leave Group",
+        img: exittt,
+      });
+    } else {
       setbtninfo({
-        text:"Join Group",
-        img:groupp,
-        btnClass:'color-btn'
-      })
+        text: "Join Group",
+        img: groupp,
+        btnClass: "color-btn",
+      });
     }
-  }
+  };
 
-  const followUnfollow = ()=>{
-    if(followw.text === "Follow"){
-      setfollow({
-        text:"Followed",
-        btnClass:'rec-types-right-btn'
-      })
-    }else{
-      setfollow({
-        text:"Follow",
-        btnClass:''
-      })
-    }
-  }
-
+  const followUnfollow = (group) => {
+    setFollowStatus((prevState) => ({
+      ...prevState,
+      [group]: !prevState[group],
+    }));
+  };
   return (
     <>
       <header className="flex header-cont">
@@ -132,7 +131,9 @@ const Mainpage = () => {
       <section className="upper-section">
         <div className="flex small-screen-cont">
           <img src={leavearrow} alt="" />
-          <button className="small-screen-btn" onClick={joinorLeave}>{btninfo.text}</button>
+          <button className="small-screen-btn" onClick={joinorLeave}>
+            {btninfo.text}
+          </button>
         </div>
         <div className="flex-contain flex">
           <div className="upper-head">Computer Engineering</div>
@@ -158,9 +159,11 @@ const Mainpage = () => {
               <button className="flex btn">
                 <span> Write a post</span> <img src={Arrow} alt="" />
               </button>
-              <button className={`flex btn ${btninfo.btnClass}`} onClick={joinorLeave}>
-                <img src={btninfo.img} alt="" /> <span>{btninfo.text}
-                </span>
+              <button
+                className={`flex btn ${btninfo.btnClass}`}
+                onClick={joinorLeave}
+              >
+                <img src={btninfo.img} alt="" /> <span>{btninfo.text}</span>
               </button>
             </div>
           </div>
@@ -387,8 +390,15 @@ const Mainpage = () => {
                               <img src={reco1} alt="" />
                               <span>Leisure</span>
                             </div>
-                            <div className="rec-types-right" onClick={followUnfollow}>
-                              <button className={`${followw.btnClass}`}>{followw.text}</button>
+                            <div className="rec-types-right">
+                              <button
+                                onClick={() => followUnfollow("Leisure")}
+                                className={`flex reco-follow-btn ${
+                                  followStatus.Leisure ? "followed" : "follow"
+                                }`}
+                              >
+                                {followStatus.Leisure ? "Followed" : "Follow"}
+                              </button>
                             </div>
                           </div>
                           <div className="flex flex-r rec-types-main">
@@ -396,8 +406,15 @@ const Mainpage = () => {
                               <img src={reco2} alt="" />
                               <span>Activism</span>
                             </div>
-                            <div className="rec-types-right" onClick={followUnfollow}>
-                              <button className={`${followw.btnClass}`}>{followw.text}</button>
+                            <div className="rec-types-right">
+                              <button
+                                onClick={() => followUnfollow("Activism")}
+                                className={`flex reco-follow-btn ${
+                                  followStatus.Activism ? "followed" : "follow"
+                                }`}
+                              >
+                                {followStatus.Activism ? "Followed" : "Follow"}
+                              </button>
                             </div>
                           </div>
                           <div className="flex flex-r rec-types-main">
@@ -405,8 +422,15 @@ const Mainpage = () => {
                               <img src={reco3} alt="" />
                               <span>MBA</span>
                             </div>
-                            <div className="rec-types-right" onClick={followUnfollow}>
-                              <button className={`${followw.btnClass}`}>{followw.text}</button>
+                            <div className="rec-types-right">
+                              <button
+                                onClick={() => followUnfollow("MBA")}
+                                className={`flex reco-follow-btn ${
+                                  followStatus.MBA ? "followed" : "follow"
+                                }`}
+                              >
+                                {followStatus.MBA ? "Followed" : "Follow"}
+                              </button>
                             </div>
                           </div>
                           <div className="flex flex-r rec-types-main">
@@ -414,8 +438,19 @@ const Mainpage = () => {
                               <img src={reco4} alt="" />
                               <span>Philosofy</span>
                             </div>
-                            <div className="rec-types-right" onClick={followUnfollow}>
-                              <button className={`${followw.btnClass}`}>{followw.text}</button>
+                            <div className="rec-types-right">
+                              <button
+                                onClick={() => followUnfollow("Philosophy")}
+                                className={`.rec-types-right-btn ${
+                                  followStatus.Philosophy
+                                    ? "followed"
+                                    : "follow"
+                                }`}
+                              >
+                                {followStatus.Philosophy
+                                  ? "Followed"
+                                  : "Follow"}
+                              </button>
                             </div>
                           </div>
                         </div>

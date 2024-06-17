@@ -368,7 +368,7 @@
   font-weight: var(--weight-600);
 }
 
-.rec-types-right-btn{
+.followed{
   background: black !important;
   color: white;
 }
