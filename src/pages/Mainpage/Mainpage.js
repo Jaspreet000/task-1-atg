@@ -39,6 +39,10 @@ const Mainpage = () => {
     text:"Join Group",
     img:groupp,
     btnClass:'color-btn'
+  });
+  const [followw, setfollow] = useState({
+    text:"Follow",
+    btnClass:''
   })
 
   const handleSignIn = (userData) => {
@@ -58,6 +62,20 @@ const Mainpage = () => {
         text:"Join Group",
         img:groupp,
         btnClass:'color-btn'
+      })
+    }
+  }
+
+  const followUnfollow = ()=>{
+    if(followw.text === "Follow"){
+      setfollow({
+        text:"Followed",
+        btnClass:'rec-types-right-btn'
+      })
+    }else{
+      setfollow({
+        text:"Follow",
+        btnClass:''
       })
     }
   }
@@ -369,8 +387,8 @@ const Mainpage = () => {
                               <img src={reco1} alt="" />
                               <span>Leisure</span>
                             </div>
-                            <div className="rec-types-right">
-                              <button>Follow</button>
+                            <div className="rec-types-right" onClick={followUnfollow}>
+                              <button className={`${followw.btnClass}`}>{followw.text}</button>
                             </div>
                           </div>
                           <div className="flex flex-r rec-types-main">
@@ -378,8 +396,8 @@ const Mainpage = () => {
                               <img src={reco2} alt="" />
                               <span>Activism</span>
                             </div>
-                            <div className="rec-types-right">
-                              <button>Follow</button>
+                            <div className="rec-types-right" onClick={followUnfollow}>
+                              <button className={`${followw.btnClass}`}>{followw.text}</button>
                             </div>
                           </div>
                           <div className="flex flex-r rec-types-main">
@@ -387,8 +405,8 @@ const Mainpage = () => {
                               <img src={reco3} alt="" />
                               <span>MBA</span>
                             </div>
-                            <div className="rec-types-right">
-                              <button>Follow</button>
+                            <div className="rec-types-right" onClick={followUnfollow}>
+                              <button className={`${followw.btnClass}`}>{followw.text}</button>
                             </div>
                           </div>
                           <div className="flex flex-r rec-types-main">
@@ -396,8 +414,8 @@ const Mainpage = () => {
                               <img src={reco4} alt="" />
                               <span>Philosofy</span>
                             </div>
-                            <div className="rec-types-right">
-                              <button>Follow</button>
+                            <div className="rec-types-right" onClick={followUnfollow}>
+                              <button className={`${followw.btnClass}`}>{followw.text}</button>
                             </div>
                           </div>
                         </div>

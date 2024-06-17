@@ -368,6 +368,10 @@
   font-weight: var(--weight-600);
 }
 
+.rec-types-right-btn{
+  background: black !important;
+  color: white;
+}
 /*Media Queries*/
 
 @media screen and (max-width:887px){
